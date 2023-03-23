@@ -1,6 +1,6 @@
 <h2>Mate seu tempo com este jogo super divertido e viciante, jogo divertido de balões e balões, estoure todos antes do tempo para ganhar, quebre seus recordes.🏆🎉</h2>
 
-<img src=/rd/logo.png width="300px" align="center"/>
+<img src=/rd/logo.png width="200px" align="center"/>
 
 <h3>Sobre o jogo:</h3><br>
 -Feito com javaScript. <br>
