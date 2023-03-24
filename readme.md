@@ -15,3 +15,5 @@ Estoure todos os balões no menor tempo que conseguir <br><br>
 <img src=/rd/estoura_balao.gif width="700px" align="center" />
 
 alterando o nivél de dificuldade, seu tempo diminue, será que você consegue esse desafio?
+
+[Clique aqui para jogar🎮](https://ei-gih.github.io/Estoura_balao/)
