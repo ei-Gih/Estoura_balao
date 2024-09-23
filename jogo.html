@@ -1,51 +1,56 @@
 <!DOCTYPE HTML>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="imagens/logo.png" />
+    <title>Estourando balões</title>
+    <script src="jogo.js"></script>
+  </head>
+  <body onload="iniciaJogo()">
+    <div class="jogo">
+      <!-- Barra lateral com placar -->
+      <div class="placar">
+        <!-- Botão para voltar ao menu -->
+        <a href="index.html">
+          <img src="imagens/iniciar.png" alt="Voltar ao Menu" class="voltar-menu" />
+        </a>
 
-		<title>Estourando balões</title>
+        <table border="0">
+          <tr>
+            <td><img src="imagens/balao-roxo.png" class="imagi" /></td>
+            <td>
+              <span id="baloes_inteiros" style="font-size: 50px;"></span>
+            </td>
+          </tr>
+        </table>
 
-		<script src="jogo.js"></script>
+        <br />
 
-	</head>
+        <table border="0">
+          <tr>
+            <td>
+              <img
+                src="imagens/balao-roxo-estourado.png"
+                style="width: 50px; margin-right: 10px;"
+              />
+            </td>
+            <td>
+              <span id="baloes_estourados" style="font-size: 50px;"></span>
+            </td>
+          </tr>
+        </table>
 
-	<body onload="iniciaJogo()">
-		<div style="float:left; width:auto; height:500px; background: #FFF; border: solid 1px #A2A2A2; margin-right: 5px;">
-			<table border="0">
-				<tr>
-					<td>
-						<img src="imagens/balao_azul_grande.png" />
-					</td>
-					<td>
-						<span id="baloes_inteiros" style="font-size: 40px;"></span>
-					</td>
-				</tr>
-			</table>
+        <br />
+        <table border="0" class="placars">
+          <tr>
+            <span id="cronometro"></span>
+          </tr>
+        </table>
+      </div>
 
-			<br />
-			<table border="0">
-				<tr>
-					<td>
-						<img src="imagens/balao_azul_grande_estourado.png" />
-					</td>
-					<td>
-						<span id="baloes_estourados" style="font-size: 40px;"></span>
-					</td>
-				</tr>
-			</table>
-
-			<br/>
-			<table border="0" style="width: 140px; height: 132px;">
-				<tr>
-					<td style="background: url('imagens/cronometro.png'); text-align:center">
-						<span id="cronometro" style="color: red; font-size: 30px;"></span>
-					</td>
-				</tr>
-			</table>
-
-		</div>
-
-		<div id="cenario" style="float: left; width: 600px; height: 500px; background: url('imagens/cenario.png'); background-position: bottom;"></div>
-	</body>
-	
+      <!-- Cenário onde os balões aparecem -->
+      <div id="cenario"></div>
+    </div>
+  </body>
 </html>

@@ -24,7 +24,7 @@ function iniciaJogo(){
 	document.getElementById('cronometro').innerHTML = tempo_segundos;
 
 	// quantidade de balões
-	var qtde_baloes = 80;
+	var qtde_baloes = 78;
 	
 	cria_baloes(qtde_baloes);
 
@@ -60,8 +60,9 @@ function cria_baloes(qtde_baloes){
 	for(var i = 1; i <= qtde_baloes; i++){
 
 		var balao = document.createElement("img");
-		balao.src = 'imagens/balao_azul_pequeno.png';
+		balao.src = 'imagens/balao-roxo.png';
 		balao.style.margin = '10px';
+		balao.style.width = '40px';
 		balao.id = 'b'+i;
 		balao.onclick = function(){ estourar(this); };
 
@@ -74,7 +75,7 @@ function estourar(e){
 	var id_balao = e.id;
 
 	document.getElementById(id_balao).setAttribute("onclick", "");
-	document.getElementById(id_balao).src = 'imagens/balao_azul_pequeno_estourado.png';
+	document.getElementById(id_balao).src = 'imagens/balao-roxo-estourado.png';
 
 	pontuacao(-1);
 
@@ -95,8 +96,6 @@ function pontuacao(acao){
 	document.getElementById('baloes_estourados').innerHTML = baloes_estourados;
 
 	situacao_jogo(baloes_inteiros);
-
-
 }
 
 function situacao_jogo(baloes_inteiros){
