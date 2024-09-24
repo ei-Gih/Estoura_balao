@@ -14,7 +14,7 @@ function iniciaJogo() {
   }
 
   document.getElementById("cronometro").innerHTML = tempo_segundos;
-  var qtde_baloes = 80;
+  var qtde_baloes = 92;
   cria_baloes(qtde_baloes);
   document.getElementById("baloes_inteiros").innerHTML = qtde_baloes;
   document.getElementById("baloes_estourados").innerHTML = 0;
