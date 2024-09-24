@@ -71,3 +71,45 @@ body {
 img.estourado {
   visibility: hidden;
 }
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .placar {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .balao-container {
+    margin-bottom: 10px;
+  }
+
+  .cronometro {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .voltar-menu {
+    width: 40px;
+  }
+
+  .balao-img {
+    width: 40px;
+  }
+
+  .balao-texto {
+    font-size: 18px;
+  }
+
+  .cronometro {
+    font-size: 20px;
+  }
+
+  .cenario img {
+    width: 40px;
+  }
+}
