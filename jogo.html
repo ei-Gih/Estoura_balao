@@ -1,58 +1,36 @@
 <!DOCTYPE HTML>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css" />
-    <link rel="icon" href="imagens/logo.png" />
-    <title>Estourando balões</title>
-    <script src="jogo.js"></script>
-  </head>
-  <body onload="iniciaJogo()">
-    <div class="jogo">
-      <!-- Barra lateral com placar -->
-      <div class="placar">
-        <!-- Botão para voltar ao menu -->
-        <a href="index.html">
-          <img src="imagens/iniciar.png" alt="Voltar ao Menu" class="voltar-menu" />
-        </a>
-
-        <table border="0">
-          <tr>
-            <td><img src="imagens/balao-roxo.png" class="imagi" /></td>
-            <td>
-              <span id="baloes_inteiros" style="font-size: 50px;"></span>
-            </td>
-          </tr>
-        </table>
-
-        <br />
-
-        <table border="0">
-          <tr>
-            <td>
-              <img
-                src="imagens/balao-roxo-estourado.png"
-                style="width: 50px; margin-right: 10px;"
-              />
-            </td>
-            <td>
-              <span id="baloes_estourados" style="font-size: 50px;"></span>
-            </td>
-          </tr>
-        </table>
-
-        <br />
-        <table border="0" class="placars">
-          <tr>
-            <span id="cronometro"></span>
-          </tr>
-        </table>
+  <html lang="pt-br">
+    <head>
+      <meta charset="UTF-8" />
+      <link rel="stylesheet" href="style.css" />
+      <link rel="icon" href="imagens/logo.png" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Estourando balões</title>
+      <script src="jogo.js"></script>
+    </head>
+    <body onload="iniciaJogo()">
+      <div class="container">
+        <!-- Barra lateral com placar -->
+        <div class="placar">
+          <a href="index.html">
+            <img src="imagens/iniciar.png" alt="Voltar ao Menu" class="voltar-menu" />
+          </a>
+          <!-- Balões inteiros -->
+          <div class="balao-container">
+            <img src="imagens/balao-roxo.png" class="balao-img" />
+            <span id="baloes_inteiros" class="balao-texto"></span>
+          </div>
+          <!-- Balões estourados -->
+          <div class="balao-container">
+            <img src="imagens/balao-roxo-estourado.png" class="balao-img" />
+            <span id="baloes_estourados" class="balao-texto"></span>
+          </div>
+          <!-- Cronômetro -->
+          <div id="cronometro" class="cronometro"></div>
+        </div>
+        <!-- Cenário onde os balões aparecem -->
+        <div id="cenario" class="cenario"></div>
       </div>
-
-      <!-- Cenário onde os balões aparecem -->
-      <div id="cenario"></div>
-    </div>
-  </body>
-</html>
+    </body>
+  </html>

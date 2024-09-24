@@ -1,80 +1,73 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Alinha ao topo */
-    height: 100vh;
-    font-family: "Arial";
-    background-image: url("imagens/fundo.jpg");
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
-    overflow: hidden; /* Impede que o conteúdo vá além da tela */
-  }
-  
-  /* Barra lateral com placar */
-  .placar {
-    background-color: aliceblue;
-    width: 130px; /* Define a largura da barra lateral */
-    height: 100vh; /* Ocupa toda a altura da tela */
-    padding: 20px;
-    border-radius: 8px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 16px;
-    position: relative; /* Necessário para o botão de voltar */
-  }
-  
-  #cronometro {
-    color: red;
-    font-size: 60px;
-    margin-top: 60%;
-  }
-  .imagi {
-    width: 40px;
-    margin-right: 20px;
-  }
-  .placars {
-    width: 100%;
-  }
-  
-  /* Botão de Voltar */
-  .voltar-menu {
-    position: absolute;
-    top: 440px;
-    left: 40px;
-    width: 50px;
-    cursor: pointer;
-  }
-  
-  /* Cenário onde os balões aparecem */
-  #cenario {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    padding: 20px;
-  }
-  
-  #cenario img {
-    width: 80px;
-    margin: 10px;
-    cursor: pointer;
-  }
-  
-  .jogo {
-    display: flex;
-    width: 100%;
-    height: 100vh;
-  }
-  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: url('/imagens/fundo.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+.placar {
+  width: 11%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.voltar-menu {
+  width: 50px;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.balao-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.balao-img {
+  width: 60px;
+  margin-right: 10px;
+}
+
+.balao-texto {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.cronometro {
+  font-size: 36px;
+  color: red;
+  margin-top: 20px;
+}
+
+.cenario {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cenario img {
+  margin: 10px;
+  width: 35px;
+  cursor: pointer;
+}
+
+img.estourado {
+  visibility: hidden;
+}
