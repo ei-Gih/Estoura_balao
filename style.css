@@ -1,115 +1,361 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ═══════════════════════════════════════════
+   ESTOURA BALÃO — Game UI CSS
+   ═══════════════════════════════════════════ */
+
+:root {
+  --bg:        #08080f;
+  --surface:   #10101c;
+  --card:      #161625;
+  --hud-bg:    rgba(10, 10, 20, 0.92);
+  --hud-w:     88px;
+
+  --accent:    #c94fff;
+  --accent2:   #ff5f87;
+  --accent3:   #ffda3d;
+  --green:     #30d158;
+  --red:       #ff453a;
+
+  --text:      #f0eeff;
+  --muted:     #6b6890;
+  --border:    rgba(201, 79, 255, 0.15);
+
+  --balloon-size: clamp(44px, 5vw, 68px);
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
 }
 
-body {
-  font-family: Arial, sans-serif;
-  background: url('imagens/fundo.jpg') no-repeat center center fixed;
-  background-size: cover;
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  cursor: crosshair;
 }
 
-.container {
-  display: flex;
-  height: 100vh;
+/* ─── BG Canvas ─── */
+#bg-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.18;
 }
 
-.placar {
-  width: 9%;
-  background-color: rgba(255, 255, 255, 0.7);
+/* ─── HUD ─── */
+.hud {
+  position: fixed;
+  left: 0; top: 0; bottom: 0;
+  width: var(--hud-w);
+  background: var(--hud-bg);
+  backdrop-filter: blur(18px);
+  border-right: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 20px;
+  padding: 18px 0 24px;
+  gap: 0;
+  z-index: 10;
+  box-shadow: 4px 0 40px rgba(0,0,0,0.4);
 }
 
-.voltar-menu {
-  width: 50px;
-  cursor: pointer;
-  margin-bottom: 30px;
-}
-
-.balao-container {
+.hud-back {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: center;
+  width: 40px; height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s;
+  flex-shrink: 0;
+}
+.hud-back:hover { color: var(--text); border-color: var(--accent); background: rgba(201,79,255,0.08); }
+
+.hud-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--border);
+  margin: 14px 0;
+  flex-shrink: 0;
 }
 
-.balao-img {
-  width: 60px;
-  margin-right: 10px;
+.hud-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-.balao-texto {
-  font-size: 24px;
-  font-weight: bold;
+.hud-label {
+  font-family: var(--font-display);
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-align: center;
 }
 
-.cronometro {
-  font-size: 36px;
-  color: red;
-  margin-top: 20px;
+/* Timer */
+.hud-timer {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+  transition: color 0.4s;
+  text-align: center;
 }
+.hud-timer.urgent { color: var(--red); animation: urgentPulse 0.5s infinite alternate; }
+@keyframes urgentPulse { from { opacity:1; } to { opacity:0.5; } }
 
+.timer-bar-wrap {
+  width: 48px;
+  height: 4px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.timer-bar {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  border-radius: 4px;
+  transition: width 1s linear, background 0.5s;
+  transform-origin: left;
+}
+.timer-bar.low { background: linear-gradient(90deg, var(--red), #ff9f0a); }
+
+/* Counters */
+.hud-counter-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.balloon-icon { font-size: 1.4rem; line-height: 1; }
+.hud-count {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.intact-count  { color: var(--accent); }
+.popped-count  { color: var(--green); }
+
+/* Level badge */
+.hud-nivel-badge {
+  font-family: var(--font-display);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 5px 10px;
+  border-radius: 100px;
+  text-transform: uppercase;
+  background: rgba(201,79,255,0.12);
+  border: 1px solid var(--border);
+  color: var(--accent);
+  text-align: center;
+}
+.hud-nivel-badge.facil  { background:rgba(48,209,88,0.12); border-color:rgba(48,209,88,0.3); color:#30d158; }
+.hud-nivel-badge.normal { background:rgba(255,218,61,0.12); border-color:rgba(255,218,61,0.3); color:#ffda3d; }
+.hud-nivel-badge.dificil{ background:rgba(255,69,58,0.12);  border-color:rgba(255,69,58,0.3);  color:#ff453a; }
+
+/* ─── CENÁRIO ─── */
 .cenario {
-  flex: 1;
+  position: fixed;
+  left: var(--hud-w);
+  top: 0; right: 0; bottom: 0;
   display: flex;
   flex-wrap: wrap;
+  align-content: center;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  gap: 6px;
+  padding: 24px 28px;
+  overflow: hidden;
+  z-index: 1;
 }
 
-.cenario img {
-  margin: 10px;
-  width: 50px;
+/* ─── BALLOON ─── */
+.balloon {
+  width: var(--balloon-size);
+  height: calc(var(--balloon-size) * 1.25);
+  position: relative;
+  cursor: crosshair;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s;
+  animation: floatIn 0.4s ease both;
+  flex-shrink: 0;
+}
+.balloon:hover { transform: scale(1.15); }
+.balloon:active { transform: scale(0.92); }
+
+@keyframes floatIn {
+  from { opacity: 0; transform: scale(0.3) translateY(20px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.balloon svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+  transition: filter 0.15s;
+}
+.balloon:hover svg { filter: drop-shadow(0 6px 20px rgba(201,79,255,0.6)); }
+
+/* Popped state */
+.balloon.estourado {
+  animation: popAnim 0.25s ease forwards;
+  pointer-events: none;
+}
+@keyframes popAnim {
+  0%   { transform: scale(1.3); opacity: 1; }
+  50%  { transform: scale(1.6); opacity: 0.5; }
+  100% { transform: scale(0); opacity: 0; }
+}
+
+/* ─── BURST PARTICLES ─── */
+.burst-particle {
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: burstFly 0.55s ease-out forwards;
+}
+@keyframes burstFly {
+  0%   { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0); opacity: 0; }
+}
+
+/* ─── OVERLAY ─── */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,8,15,0.85);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: overlayIn 0.35s ease;
+}
+.overlay.hidden { display: none; }
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.overlay-box {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 52px 56px;
+  text-align: center;
+  max-width: 460px;
+  width: 90%;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 60px rgba(201,79,255,0.1);
+  animation: boxIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes boxIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.overlay-emoji {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: 16px;
+  animation: emojiPop 0.5s 0.2s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes emojiPop {
+  from { transform: scale(0); }
+  to   { transform: scale(1); }
+}
+
+.overlay-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+.overlay-title.win  { background: linear-gradient(90deg, var(--green), var(--accent3)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+.overlay-title.lose { background: linear-gradient(90deg, var(--red), var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+.overlay-sub { color: var(--muted); font-size: 0.92rem; line-height: 1.6; margin-bottom: 28px; }
+
+.overlay-stats {
+  display: flex;
+  gap: 2px;
+  background: var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 28px;
+}
+.ostat {
+  flex: 1;
+  background: var(--surface);
+  padding: 18px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.ostat-num {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 2rem;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.ostat-label { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; }
+
+.overlay-btns {
+  display: flex;
+  gap: 12px;
+}
+.btn-replay, .btn-menu {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.9rem;
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: none;
 }
-
-img.estourado {
-  visibility: hidden;
+.btn-replay {
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(201,79,255,0.35);
 }
-/* Responsividade */
-@media (max-width: 768px) {
-  .container {
-    flex-direction: column;
-  }
-
-  .placar {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  .balao-container {
-    margin-bottom: 10px;
-  }
-
-  .cronometro {
-    font-size: 24px;
-  }
+.btn-replay:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(201,79,255,0.5); }
+.btn-menu {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  color: var(--text);
 }
+.btn-menu:hover { background: rgba(255,255,255,0.09); transform: translateY(-2px); }
 
-@media (max-width: 480px) {
-  .voltar-menu {
-    width: 40px;
-  }
-
-  .balao-img {
-    width: 40px;
-  }
-
-  .balao-texto {
-    font-size: 18px;
-  }
-
-  .cronometro {
-    font-size: 20px;
-  }
-
-  .cenario img {
-    width: 40px;
-  }
+/* ─── RESPONSIVE ─── */
+@media (max-width: 600px) {
+  :root { --hud-w: 64px; --balloon-size: 36px; }
+  .hud-timer { font-size: 1.4rem; }
+  .hud-count { font-size: 1.1rem; }
+  .overlay-box { padding: 36px 28px; }
+  .overlay-title { font-size: 1.5rem; }
 }
